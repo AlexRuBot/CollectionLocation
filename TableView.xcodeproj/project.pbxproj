@@ -16,7 +16,7 @@
 		74F21B452525E7F400CB8B50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74F21B432525E7F400CB8B50 /* Main.storyboard */; };
 		74F21B472525E7F600CB8B50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74F21B462525E7F600CB8B50 /* Assets.xcassets */; };
 		74F21B4A2525E7F600CB8B50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74F21B482525E7F600CB8B50 /* LaunchScreen.storyboard */; };
-		74F21B542525E83800CB8B50 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F21B532525E83800CB8B50 /* TableViewController.swift */; };
+		74F21B542525E83800CB8B50 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F21B532525E83800CB8B50 /* MainViewController.swift */; };
 		F9F2F4476251F58544E156FE /* Pods_TableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45D9921706AF44410434DA6 /* Pods_TableView.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +33,7 @@
 		74F21B462525E7F600CB8B50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74F21B492525E7F600CB8B50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74F21B4B2525E7F600CB8B50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74F21B532525E83800CB8B50 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		74F21B532525E83800CB8B50 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A45D9921706AF44410434DA6 /* Pods_TableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CD43BE9D6B65F3278CBDC2 /* Pods-TableView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TableView.debug.xcconfig"; path = "Target Support Files/Pods-TableView/Pods-TableView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +70,7 @@
 		74C7339A2526143A009B0E0E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				74F21B532525E83800CB8B50 /* TableViewController.swift */,
+				74F21B532525E83800CB8B50 /* MainViewController.swift */,
 				74EBF4D22525FDA300506874 /* TableViewCell.swift */,
 				74C73394252613FB009B0E0E /* AddNewPlace.swift */,
 			);
@@ -245,7 +245,7 @@
 				74F21B3E2525E7F400CB8B50 /* AppDelegate.swift in Sources */,
 				74EBF4D32525FDA300506874 /* TableViewCell.swift in Sources */,
 				74C73392252604B9009B0E0E /* PlaceModel.swift in Sources */,
-				74F21B542525E83800CB8B50 /* TableViewController.swift in Sources */,
+				74F21B542525E83800CB8B50 /* MainViewController.swift in Sources */,
 				74F21B402525E7F400CB8B50 /* SceneDelegate.swift in Sources */,
 				740ED105252C735C0075BFD5 /* StorageManager.swift in Sources */,
 			);

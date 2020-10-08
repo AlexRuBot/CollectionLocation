@@ -8,23 +8,28 @@
 import UIKit
 import RealmSwift
 
-class TableViewController: UITableViewController {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmenedControl: UISegmentedControl!
+    @IBOutlet weak var reversedSortingButton: UIBarButtonItem!
     
     var places: Results<Place>!
-
+    var ascendingSorting = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        reversedSortingButton.isEnabled = true
         places = realm.objects(Place.self)
     }
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.isEmpty ? 0 : places.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
 
         let place = places[indexPath.row]
@@ -41,7 +46,7 @@ class TableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let place = places[indexPath.row]
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (_,_) in
@@ -63,7 +68,7 @@ class TableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Segue
+    // MARK: - IBAction
     
     @ IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
         
@@ -74,5 +79,29 @@ class TableViewController: UITableViewController {
         
     }
     
-
+    @IBAction func sortSelection(_ sender: UISegmentedControl) {
+        
+        sorting()
+    }
+    @IBAction func revercedSorting(_ sender: Any) {
+        
+        ascendingSorting.toggle()
+        
+        if ascendingSorting {
+            reversedSortingButton.image = #imageLiteral(resourceName: "reverseDOWN")
+        } else {
+            reversedSortingButton.image = #imageLiteral(resourceName: "reverseUP")
+        }
+        sorting()
+    }
+    
+    private func sorting() {
+        
+        if segmenedControl.selectedSegmentIndex == 0 {
+            places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
+        } else {
+            places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+        }
+        tableView.reloadData()
+    }
 }
