@@ -264,7 +264,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ma8-KC-jhY">
-                                <rect key="frame" x="0.0" y="88" width="375" height="38"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="32"/>
                                 <segments>
                                     <segment title="Date"/>
                                     <segment title="Name"/>
@@ -277,10 +277,9 @@
                         <viewLayoutGuide key="safeArea" id="Ifx-qb-kAN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="EUw-Kc-eS5" firstAttribute="top" secondItem="ma8-KC-jhY" secondAttribute="bottom" constant="1" id="FHS-J4-5gy"/>
-                            <constraint firstItem="ma8-KC-jhY" firstAttribute="trailing" secondItem="Ifx-qb-kAN" secondAttribute="trailing" id="GeN-U9-kFW"/>
-                            <constraint firstItem="ma8-KC-jhY" firstAttribute="top" secondItem="Ifx-qb-kAN" secondAttribute="top" id="Vay-IK-sMD"/>
-                            <constraint firstItem="ma8-KC-jhY" firstAttribute="leading" secondItem="Ifx-qb-kAN" secondAttribute="leading" id="eJ1-el-YVe"/>
+                            <constraint firstItem="ma8-KC-jhY" firstAttribute="top" secondItem="Ifx-qb-kAN" secondAttribute="top" id="4XZ-T6-UpR"/>
+                            <constraint firstItem="ma8-KC-jhY" firstAttribute="leading" secondItem="Ifx-qb-kAN" secondAttribute="leading" id="PxO-C7-BnU"/>
+                            <constraint firstItem="Ifx-qb-kAN" firstAttribute="trailing" secondItem="ma8-KC-jhY" secondAttribute="trailing" id="yXR-Ga-QcM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My playces" largeTitleDisplayMode="never" id="TLc-YN-cDi">

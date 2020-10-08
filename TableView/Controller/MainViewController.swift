@@ -10,29 +10,55 @@ import RealmSwift
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    private var places: Results<Place>!
+    private var filtredPlaces: Results<Place>!
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var ascendingSorting = true
+    private var searchBarIsEmty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFilterin: Bool {
+        return searchController.isActive && !searchBarIsEmty
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmenedControl: UISegmentedControl!
     @IBOutlet weak var reversedSortingButton: UIBarButtonItem!
-    
-    var places: Results<Place>!
-    var ascendingSorting = true
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        reversedSortingButton.isEnabled = true
         places = realm.objects(Place.self)
+        
+        // Настройка SearchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 
     // MARK: - Table view data source
 
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places.isEmpty ? 0 : places.count
+        if isFilterin {
+            return filtredPlaces.count
+        } else{
+            return places.isEmpty ? 0 : places.count
+        }
     }
 
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
 
-        let place = places[indexPath.row]
+        var place = Place()
+        
+        if isFilterin {
+            place = filtredPlaces[indexPath.row ]
+        } else {
+            place = places[indexPath.row]
+        }
 
         cell.nameLable.text = place.name
         cell.locationLable.text = place.location
@@ -62,7 +88,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDelail" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let place = places[indexPath.row]
+            
+            var place = Place()
+            
+            if isFilterin {
+                place = filtredPlaces[indexPath.row ]
+            } else {
+                place = places[indexPath.row]
+            }
+            
             let newPlaceVC = segue.destination as! AddNewPlace
             newPlaceVC.currentPlace = place
         }
@@ -102,6 +136,20 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
         }
+        tableView.reloadData()
+    }
+}
+
+extension MainViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+
+    private func filterContentForSearchText(_ searchText: String) {
+        
+        filtredPlaces = places.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
+        
         tableView.reloadData()
     }
 }
