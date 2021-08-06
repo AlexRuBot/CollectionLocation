@@ -21,6 +21,8 @@ class AddNewPlace: UITableViewController {
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
     
+    @IBOutlet weak var mapButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +56,17 @@ class AddNewPlace: UITableViewController {
             view.endEditing(true)
         }
     }
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier != "showMap" {
+            return
+        }
+        let mapVC = segue.destination as! MapViewController
+        
+        mapVC.place = currentPlace
+    }
+    
     
     // MARK: - Sace new place
     
@@ -99,7 +112,10 @@ class AddNewPlace: UITableViewController {
             placeLocation.text = currentPlace?.location
             placeType.text = currentPlace?.type
             placeImage.image = image
+            
+            mapButton.isEnabled = true
         } else {
+            mapButton.isEnabled = false
             return
         }
     }

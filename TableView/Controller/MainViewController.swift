@@ -72,10 +72,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - Table view delegate
     
-     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    private func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UIContextualAction]? {
         
         let place = places[indexPath.row]
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (_,_) in
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { (contex, view, nil)  in
             
             StorageManager.deleteObject(place)
             tableView.deleteRows(at: [indexPath], with: .automatic)
